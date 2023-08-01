@@ -12,3 +12,6 @@ export const userLogin = Joi.object({
     password: Joi.string().trim().required(),
 });
   
+export const urlSchema = Joi.object({
+    url: Joi.string().trim().uri().required().label('URL')
+});

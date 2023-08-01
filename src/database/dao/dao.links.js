@@ -36,19 +36,20 @@ export default class LinkDAO {
             linkData.createdAt
         );
 
-        const queryString = 'INSERT INTO public.links (url, "shortUrl", views, "createdAt") VALUES ($1, $2, $3, $4)';
+        const queryString = 'INSERT INTO public.links (url, "shortUrl", views, "createdAt") VALUES ($1, $2, $3, $4) RETURNING *';
         const values = [novoLink.url, novoLink.shortUrl, novoLink.views, novoLink.createdAt];
     
         try {
-            await this.pool.query(queryString, values);
+            const result = await this.pool.query(queryString, values);
+            const linkInserido = result.rows[0]; // O resultado da consulta contém a linha inserida com o ID
             console.log('Novo link adicionado ao banco de dados.');
+            await this.disconnect();
+            return linkInserido;
         } catch (error) {
             console.error('Erro ao adicionar novo link ao banco de dados:', error.message);
+            await this.disconnect();
+            return null; // Ou você pode lançar uma exceção aqui, caso necessário
         }
-    
-        this.links.push(novoLink);
-        await this.disconnect();
-        return novoLink;
     }
     
     async read(limit = null, offset = null, order = null, desc = null) {

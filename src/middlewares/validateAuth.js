@@ -14,11 +14,14 @@ async function validateAuth(req, res, next) {
     try {
         const session = await daoLog.readByToken(token)
         if (!session) return res.sendStatus(401);
+
         const user = await dao.readById(session.userId)
         if (!user) return res.sendStatus(401);
+
         res.user = user
         // console.log("Deu bom!")
         next();
+        
     } catch (err) {
         res.status(500).send(err.message)
     }

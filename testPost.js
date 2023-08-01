@@ -1,11 +1,10 @@
 import axios from 'axios'
 
-const url = 'http://localhost:5000/teste';
+const url = 'http://localhost:5000/urls/shorten';
 const token = 'eaadb706-304f-40e5-8388-b71888dbfafc';
 
 axios.post(url, {
-  email: 'levy@gmail.com.br',
-  password: 'levy'
+  url: 'https://www.notion.so/bootcampra/Projeto-17-Shortly-API-34ff4484a1274eed901c5a2bd1e23722',
 }, { headers: {
     'Authorization': `Bearer ${token}`
   }
