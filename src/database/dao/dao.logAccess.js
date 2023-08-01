@@ -51,6 +51,24 @@ export default class LogAccessDAO {
         return newLogAccess;
     }
 
+    async readByToken(token) {
+        await this.connect();
+
+        const queryString = 'SELECT * FROM public."logAccess" WHERE token = $1';
+        const values = [token];
+
+        try {
+            const response = await this.pool.query(queryString, values);
+            console.log('Consulta token realizada com sucesso.');
+            await this.disconnect();
+            return response.rows[0] || null;
+        } catch (error) {
+            console.error('Erro ao consultar o token no banco de dados:', error.message);
+            await this.disconnect();
+            return null;
+        }
+    }
+
     async desativaOutrosAccess(userId){
         await this.connect()
 

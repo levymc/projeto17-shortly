@@ -1,19 +1,23 @@
-import { db } from "../database/database.connection.js"
+import LogAccessDAO from "../database/dao/dao.logAccess.js";
+import UsuarioDAO from "../database/dao/dao.users.js";
+
+const daoLog = new LogAccessDAO()
+const dao = new UsuarioDAO()
 
 async function validateAuth(req, res, next) {
+    console.log()
     const { authorization } = req.headers
     const token = authorization?.replace("Bearer ", "")
 
     if (!token) return res.sendStatus(401)
 
     try {
-        const session = await db.collection("sessions").findOne({ token });
+        const session = await daoLog.readByToken(token)
         if (!session) return res.sendStatus(401);
-
-        const user = await db.collection("users").findOne({ _id: session.userId });
+        const user = await dao.readById(session.userId)
         if (!user) return res.sendStatus(401);
-        
-        res.locals.user = user;
+        res.user = user
+        // console.log("Deu bom!")
         next();
     } catch (err) {
         res.status(500).send(err.message)

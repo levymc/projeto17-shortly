@@ -1,7 +1,6 @@
 import UsuarioDAO from "../database/dao/dao.users.js";
 import LogAccessDAO from "../database/dao/dao.logAccess.js";
 import { crypt } from "../middlewares/crypt.js";
-import generateToken from "../middlewares/generateToken.js"
 import { format, addDays } from 'date-fns';
 
 const dao = new UsuarioDAO()
