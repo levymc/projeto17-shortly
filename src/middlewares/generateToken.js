@@ -6,4 +6,4 @@ const generateToken = (req, res, next) => {
     next()
 };
 
-export default tokenMiddleware;
+export default generateToken;
