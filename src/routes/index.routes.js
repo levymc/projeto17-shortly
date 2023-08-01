@@ -12,7 +12,7 @@ const router = Router();
 router.post('/signup', (req, res, next) => validateSchema(req, res, next, userSchema), validadeEmail, signUp)
 router.post('/signin', (req, res, next) => validateSchema(req, res, next, userLogin), validateUserPass, generateToken, signIn)
 
-router.post('/urls/shorten', (req, res, next) => validateSchema(req, res, next, urlSchema, true), validateAuth, postUrl)
+router.post('/urls/shorten', (req, res, next) => validateSchema(req, res, next, urlSchema), validateAuth, postUrl)
 
 
 router.use((err, req, res, next) => {
