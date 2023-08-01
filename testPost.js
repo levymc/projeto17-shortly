@@ -1,16 +1,26 @@
 import axios from 'axios'
 
 
-axios.post('http://localhost:5000/signup', {
-    name: "João",
+axios.post('http://localhost:5000/signin', {
     email: "joao@driven.com.br",
     password: "driven",
-    confirmPassword: "driven"
 }).then(res =>{
     console.log(res.data)
 }).catch(err => {
     console.log(err.response.data)
 })
+
+
+// axios.post('http://localhost:5000/signup', {
+//     name: "João",
+//   email: "joao@driven.com.br",
+//   password: "driven",
+//   confirmPassword: "driven"
+// }).then(res =>{
+//     console.log(res.data)
+// }).catch(err => {
+//     console.log(err.response.data)
+// })
 
 
 

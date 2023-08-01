@@ -1,12 +1,13 @@
 import { Router } from "express";
 import validateSchema from "../middlewares/validateSchema.js";
-import userSchema from "../schemas/user.schema.js";
+import { userSchema, userLogin } from "../schemas/user.schema.js";
 import { signUp } from "../controllers/user.controller.js";
-import validadeEmail from "../middlewares/validateEmail.js";
+import { validadeEmail, validateUserPass } from "../middlewares/userValidates.js";
 
 const router = Router();
 
-router.post('/signup', (req, res, next) => validateSchema(req, res, next, userSchema), validadeEmail, signUp);
+router.post('/signup', (req, res, next) => validateSchema(req, res, next, userSchema), validadeEmail, signUp)
+router.post('/signin', (req, res, next) => validateSchema(req, res, next, userLogin), validateUserPass)
 
 
 router.use((err, req, res, next) => {
