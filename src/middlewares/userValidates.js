@@ -8,7 +8,7 @@ export async function validadeEmail(req, res, next){
     try{
         const dataRes = await dao.readByEmail(email)
         console.log(dataRes)
-        if (dataRes) return res.send("Email inválido").status(409)
+        if (dataRes) return res.sendStatus(409)
         next()
     }catch (err) {
         console.error("Erro validateEmail: ", err)
