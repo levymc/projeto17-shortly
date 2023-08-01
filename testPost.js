@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 
-axios.post('http://localhost:5000/customers', {
-    name: 'Vitorio',
-    phone: '21998899222',
-    cpf: '01234527890',
-    birthday: '1992-10-25'
+axios.post('http://localhost:5000/signup', {
+    name: "João",
+    email: "joao@driven.com.br",
+    password: "driven",
+    confirmPassword: "driven"
 }).then(res =>{
     console.log(res.data)
 }).catch(err => {

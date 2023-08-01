@@ -1,4 +1,4 @@
-import GamesDAO from "../database/dao/dao.games.js";
+import GamesDAO from "../database/dao/dao.users.js";
 
 const dao = new GamesDAO()
 

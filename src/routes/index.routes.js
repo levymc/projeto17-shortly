@@ -1,13 +1,12 @@
 import { Router } from "express";
-import { getGames, postGames } from "../controllers/games.controllers.js"
 import validateSchema from "../middlewares/validateSchema.js";
-import itemSchema from "../schemas/item.schema.js";
-
+import userSchema from "../schemas/user.schema.js";
+import { signUp } from "../controllers/user.controller.js";
+import validadeEmail from "../middlewares/validateEmail.js";
 
 const router = Router();
 
-router.get('/games', getGames);
-router.post('/games', (req, res, next) => { validateSchema(req, res, next, itemSchema) }, postGames)
+router.post('/signup', (req, res, next) => validateSchema(req, res, next, userSchema), validadeEmail, signUp);
 
 
 router.use((err, req, res, next) => {
