@@ -1,13 +1,14 @@
 import { Router } from "express";
 import validateSchema from "../middlewares/validateSchema.js";
 import { userSchema, userLogin } from "../schemas/user.schema.js";
-import { signUp } from "../controllers/user.controller.js";
+import { signUp, signIn } from "../controllers/user.controller.js";
 import { validadeEmail, validateUserPass } from "../middlewares/userValidates.js";
+import generateToken from "../middlewares/generateToken.js";
 
 const router = Router();
 
 router.post('/signup', (req, res, next) => validateSchema(req, res, next, userSchema), validadeEmail, signUp)
-router.post('/signin', (req, res, next) => validateSchema(req, res, next, userLogin), validateUserPass)
+router.post('/signin', (req, res, next) => validateSchema(req, res, next, userLogin), validateUserPass, generateToken, signIn)
 
 
 router.use((err, req, res, next) => {

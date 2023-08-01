@@ -36,7 +36,7 @@ export default class LogAccessDAO {
             logAccessData.valid
         );
 
-        const queryString = 'INSERT INTO public.logAccess ("userId", token, "createdAt", valid) VALUES ($1, $2, $3, $4)';
+        const queryString = 'INSERT INTO public."logAccess" ("userId", token, "createdAt", valid) VALUES ($1, $2, $3, $4)';
         const values = [newLogAccess.userId, newLogAccess.token, newLogAccess.createdAt, newLogAccess.valid];
     
         try {
@@ -51,8 +51,25 @@ export default class LogAccessDAO {
         return newLogAccess;
     }
 
+    async desativaOutrosAccess(userId){
+        await this.connect()
+
+        const queryString = `update public."logAccess" set valid = false 
+                            where id <> (select id from public."logAccess" order by id desc limit 1)
+                            and "userId" = $1`
+        try {
+            await this.pool.query(queryString, [userId]);
+            console.log('LogAccess updated do banco de dados.');
+        } catch (error) {
+            console.error('Erro ao att o LogAccess do banco de dados:', error.message);
+            return false
+        }
+        await this.disconnect();
+        return true
+    }
+
     async delete(id) {
-        await this.connect();
+        await this.connect()
     
         const index = this.logAccessList.findIndex(logAccess => logAccess.id === id);
         if (index === -1) {

@@ -1,5 +1,5 @@
 import UsuarioDAO from "../database/dao/dao.users.js";
-import crypt from "./crypt.js";
+import { crypt, compare } from "./crypt.js";
 
 const dao = new UsuarioDAO()
 
@@ -18,14 +18,13 @@ export async function validadeEmail(req, res, next){
 
 export async function validateUserPass(req, res, next){
     const email = req.body.email
-    const password = crypt(req.body.password)
+
     try{
         const dataRes = await dao.readByEmail(email) // validação do email
-        console.log(dataRes.password != password)
-        // if (!dataRes) return res.send("Email inválido").status(401)
-        // else if (dataRes.password != password) return res.send("Senha inválido").status(401)
-        console.log(password)
-
+        if (!dataRes) return res.send("Email inválido").status(401)
+        else if (!compare(req.body.password, dataRes.password)) return res.send("Senha inválido").status(401)
+        res.userData = dataRes
+        next()
     }catch (err) {
         console.error("Erro validateUserPass: ", err)
         return res.status(500).send("Erro Validação de Usuario e Senha: ",err)

@@ -2,8 +2,8 @@ import axios from 'axios'
 
 
 axios.post('http://localhost:5000/signin', {
-    email: "joao@driven.com.br",
-    password: "driven",
+    email: "levy@gmail.com.br",
+    password: "levy",
 }).then(res =>{
     console.log(res.data)
 }).catch(err => {
@@ -12,10 +12,10 @@ axios.post('http://localhost:5000/signin', {
 
 
 // axios.post('http://localhost:5000/signup', {
-//     name: "João",
-//   email: "joao@driven.com.br",
-//   password: "driven",
-//   confirmPassword: "driven"
+//     name: "Levy",
+//     email: "levy@gmail.com.br",
+//     password: "levy",
+//     confirmPassword: "levy"
 // }).then(res =>{
 //     console.log(res.data)
 // }).catch(err => {
