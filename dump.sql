@@ -29,7 +29,7 @@ CREATE TABLE public.links (
     url character varying NOT NULL,
     "shortUrl" character varying,
     views integer,
-    "createdAt" date
+    "createdAt" timestamp without time zone
 );
 
 
@@ -186,9 +186,10 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 --
 
 INSERT INTO public.links VALUES (1, 'https://www.notion.so/bootcampra/Projeto-17-Shortly-API-34ff4484a1274eed901c5a2bd1e23722', 'bd8235a0', NULL, NULL);
-INSERT INTO public.links VALUES (2, 'https://www.notion.so/bootcampra/Projeto-17-Shortly-API-34ff4484a1274eed901c5a2bd1e23722', 'dUJ40NY3z4', NULL, '2023-08-01');
-INSERT INTO public.links VALUES (3, 'https://www.notion.so/bootcampra/Projeto-17-Shortly-API-34ff4484a1274eed901c5a2bd1e23722', 'yFT2cFPYKe', NULL, '2023-08-01');
-INSERT INTO public.links VALUES (4, 'https://www.notion.so/bootcampra/Projeto-17-Shortly-API-34ff4484a1274eed901c5a2bd1e23722', 'ldzsopGSg6', NULL, '2023-08-01');
+INSERT INTO public.links VALUES (2, 'https://www.notion.so/bootcampra/Projeto-17-Shortly-API-34ff4484a1274eed901c5a2bd1e23722', 'dUJ40NY3z4', NULL, '2023-08-01 00:00:00');
+INSERT INTO public.links VALUES (3, 'https://www.notion.so/bootcampra/Projeto-17-Shortly-API-34ff4484a1274eed901c5a2bd1e23722', 'yFT2cFPYKe', NULL, '2023-08-01 00:00:00');
+INSERT INTO public.links VALUES (4, 'https://www.notion.so/bootcampra/Projeto-17-Shortly-API-34ff4484a1274eed901c5a2bd1e23722', 'ldzsopGSg6', NULL, '2023-08-01 00:00:00');
+INSERT INTO public.links VALUES (5, 'https://www.notion.so/bootcampra/Projeto-17-Shortly-API-34ff4484a1274eed901c5a2bd1e23722', '4VzdeK8Azt', NULL, '2023-08-01 00:00:00');
 
 
 --
@@ -218,15 +219,16 @@ INSERT INTO public."logAccess" VALUES (8, 3, '4a4e3011-ba49-4a08-81ac-737168d904
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.users VALUES (1, 'João', '$2b$10$zK9ail9PKuHVr5dg8X0ucepkZfCHhuSqbZ85OTkLzionOVwRHPsv2', 'joao@driven.com.br', NULL);
-INSERT INTO public.users VALUES (3, 'Levy', '$2b$10$Gp4Fregq5JRinzCJos5ae.1L9g2Yt3W37e0jupyWrO2XLtf6yi17q', 'levy@gmail.com.br', NULL);
+INSERT INTO public.users VALUES (1, 'João', '$2b$10$zK9ail9PKuHVr5dg8X0ucepkZfCHhuSqbZ85OTkLzionOVwRHPsv2', 'joao@driven.com.br', '2023-08-01 20:08:26');
+INSERT INTO public.users VALUES (3, 'Levy', '$2b$10$Gp4Fregq5JRinzCJos5ae.1L9g2Yt3W37e0jupyWrO2XLtf6yi17q', 'levy@gmail.com.br', '2023-08-01 20:08:26');
+INSERT INTO public.users VALUES (4, 'Frederico da Silva Barbosa', '$2b$10$69hocaZEIAA4mOY9h.pcme4QTc.g920d1SAJpHdAn4ZPUSk9DPTJC', 'fred@gmail.com.br', '2023-08-01 20:08:26');
 
 
 --
 -- Name: links_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.links_id_seq', 4, true);
+SELECT pg_catalog.setval('public.links_id_seq', 5, true);
 
 
 --
@@ -247,7 +249,7 @@ SELECT pg_catalog.setval('public.userlink_id_seq', 1, false);
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 3, true);
+SELECT pg_catalog.setval('public.users_id_seq', 4, true);
 
 
 --
