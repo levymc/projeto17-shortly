@@ -1,7 +1,9 @@
 
-export default function validateSchema(req, res, next, schema) {
+export default function validateSchema(req, res, next, schema, url = null) {
     const { error } = schema.validate(req.body, { abortEarly: false });
 
-    if (error) return res.status(400).send(error.details.map((detail) => detail.message))
+    const status = url ? 422 : 400
+
+    if (error) return res.status(status).send(error.details.map((detail) => detail.message))
     next()
 }

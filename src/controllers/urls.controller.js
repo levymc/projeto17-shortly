@@ -8,6 +8,7 @@ const dao = new LinkDAO()
 export async function postUrl(req, res){
     const url = req.body.url
     const shortUrl = nanoid(10)
+    if (!url) return 
     try{
         const dataRes = await dao.create({
             url: url, 

@@ -7,6 +7,9 @@ const dao = new UsuarioDAO()
 async function validateAuth(req, res, next) {
     console.log()
     const { authorization } = req.headers
+
+    if (!authorization?.startsWith("Bearer ")) return res.sendStatus(422);
+
     const token = authorization?.replace("Bearer ", "")
 
     if (!token) return res.sendStatus(401)
