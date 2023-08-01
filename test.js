@@ -1,9 +1,5 @@
-import { crypt, compare } from "./src/middlewares/crypt.js"
+import { format, addDays } from 'date-fns';
 
-console.log(crypt("driver"))
-
-
-console.log(crypt("driver"))
-
+console.log(format(new Date(), 'yyyy-MM-dd HH:MM'))
 
 

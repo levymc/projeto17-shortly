@@ -23,7 +23,7 @@ export async function signIn(req, res){
     const data = {
         userId: res.userData.id,
         token: res.token,
-        createdAt: format(new Date(), 'yyyy-MM-dd'),
+        createdAt: format(new Date(), 'yyyy-MM-dd HH:MM:ss'),
         valid: true
     }
     try{
