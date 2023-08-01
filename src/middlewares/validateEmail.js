@@ -9,9 +9,8 @@ export default async function validadeEmail(req, res, next){
         console.log(dataRes)
         if (dataRes) return res.send("Email inválido").status(409)
         next()
-
     }catch (err) {
         console.error("Erro validateEmail: ", err)
-        return res.status(500).send("Erro Validação de Email.")
+        return res.status(500).send("Erro Validação de Email: ",err)
     }
 }
