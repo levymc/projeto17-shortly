@@ -19,7 +19,7 @@ export async function postUrl(req, res){
             id: dataRes.id,
             shortUrl: dataRes.shortUrl
         }
-        res.json(retorno).status(200)
+        res.json(retorno).status(201)
     }catch (err) {
         console.error("Erro postURL: ", err)
         return res.status(500).send("Erro no postURL: ",err)

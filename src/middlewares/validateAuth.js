@@ -5,7 +5,7 @@ const daoLog = new LogAccessDAO()
 const dao = new UsuarioDAO()
 
 async function validateAuth(req, res, next) {
-    console.log()
+    console.log("AQUI")
     const { authorization } = req.headers
 
     if (!authorization?.startsWith("Bearer ")) return res.sendStatus(422);
