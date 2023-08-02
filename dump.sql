@@ -29,7 +29,8 @@ CREATE TABLE public.links (
     url character varying NOT NULL,
     "shortUrl" character varying,
     views integer,
-    "createdAt" timestamp without time zone
+    "createdAt" timestamp without time zone,
+    "createdBy" integer NOT NULL
 );
 
 
@@ -185,11 +186,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: links; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.links VALUES (1, 'https://www.notion.so/bootcampra/Projeto-17-Shortly-API-34ff4484a1274eed901c5a2bd1e23722', 'bd8235a0', NULL, NULL);
-INSERT INTO public.links VALUES (2, 'https://www.notion.so/bootcampra/Projeto-17-Shortly-API-34ff4484a1274eed901c5a2bd1e23722', 'dUJ40NY3z4', NULL, '2023-08-01 00:00:00');
-INSERT INTO public.links VALUES (3, 'https://www.notion.so/bootcampra/Projeto-17-Shortly-API-34ff4484a1274eed901c5a2bd1e23722', 'yFT2cFPYKe', NULL, '2023-08-01 00:00:00');
-INSERT INTO public.links VALUES (4, 'https://www.notion.so/bootcampra/Projeto-17-Shortly-API-34ff4484a1274eed901c5a2bd1e23722', 'ldzsopGSg6', NULL, '2023-08-01 00:00:00');
-INSERT INTO public.links VALUES (5, 'https://www.notion.so/bootcampra/Projeto-17-Shortly-API-34ff4484a1274eed901c5a2bd1e23722', '4VzdeK8Azt', NULL, '2023-08-01 00:00:00');
+INSERT INTO public.links VALUES (14, 'https://www.google.com.br/?hl=pt-BR', '0t3_JWyo4n', NULL, '2023-08-02 18:08:24', 1);
+INSERT INTO public.links VALUES (15, 'https://www.google.com.br/?hl=pt-BR', '0dZ_lCrjd_', NULL, '2023-08-02 18:08:24', 1);
+INSERT INTO public.links VALUES (16, 'http://another-enjoyment.net', 'q0G0wjS9Xr', NULL, '2023-08-02 19:08:50', 1);
+INSERT INTO public.links VALUES (17, 'http://another-enjoyment.net', 's6cT5oB7iF', NULL, '2023-08-02 19:08:11', 1);
+INSERT INTO public.links VALUES (18, 'http://another-enjoyment.net', 'UO4a9atSRS', NULL, '2023-08-02 19:08:39', 1);
+INSERT INTO public.links VALUES (19, 'http://another-enjoyment.net', 'sTnSxEfa6L', NULL, '2023-08-02 19:08:39', 1);
+INSERT INTO public.links VALUES (20, 'http://another-enjoyment.net', 'oUQx27vDmF', NULL, '2023-08-02 19:08:11', 1);
+INSERT INTO public.links VALUES (21, 'http://chief-marathon.br', 'Otksn2NBSI', NULL, '2023-08-02 19:08:47', 5);
 
 
 --
@@ -207,6 +211,8 @@ INSERT INTO public."logAccess" VALUES (11, 3, '11997e0f-f495-4ecf-9271-33c4242ad
 INSERT INTO public."logAccess" VALUES (10, 3, '87a0dd34-d6e0-42cb-85f3-7d38b11d0e88', '2023-08-01 19:08:00', false);
 INSERT INTO public."logAccess" VALUES (9, 3, '7e7882ce-5265-4aee-89d0-3b77030726e3', '2023-08-01 00:00:00', false);
 INSERT INTO public."logAccess" VALUES (8, 3, '4a4e3011-ba49-4a08-81ac-737168d904c8', '2023-08-01 00:00:00', false);
+INSERT INTO public."logAccess" VALUES (13, 5, '9ebcf7a0-19b3-4600-83e4-2ed5aff07467', '2023-08-02 19:08:05', true);
+INSERT INTO public."logAccess" VALUES (12, 5, '4f4d5dae-a0e1-4c6f-a90b-3248205eb314', '2023-08-02 19:08:02', false);
 
 
 --
@@ -222,20 +228,21 @@ INSERT INTO public."logAccess" VALUES (8, 3, '4a4e3011-ba49-4a08-81ac-737168d904
 INSERT INTO public.users VALUES (1, 'João', '$2b$10$zK9ail9PKuHVr5dg8X0ucepkZfCHhuSqbZ85OTkLzionOVwRHPsv2', 'joao@driven.com.br', '2023-08-01 20:08:26');
 INSERT INTO public.users VALUES (3, 'Levy', '$2b$10$Gp4Fregq5JRinzCJos5ae.1L9g2Yt3W37e0jupyWrO2XLtf6yi17q', 'levy@gmail.com.br', '2023-08-01 20:08:26');
 INSERT INTO public.users VALUES (4, 'Frederico da Silva Barbosa', '$2b$10$69hocaZEIAA4mOY9h.pcme4QTc.g920d1SAJpHdAn4ZPUSk9DPTJC', 'fred@gmail.com.br', '2023-08-01 20:08:26');
+INSERT INTO public.users VALUES (5, 'Ladislau Barros Filho', '$2b$10$ZI67.nsprsg3wJiak.65Y.OpMAAzmuccRz3MSdLxnvINOYp1qvo3y', 'Gael.Macedo@yahoo.com', '2023-08-02 19:08:15');
 
 
 --
 -- Name: links_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.links_id_seq', 5, true);
+SELECT pg_catalog.setval('public.links_id_seq', 21, true);
 
 
 --
 -- Name: logaccess_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.logaccess_id_seq', 11, true);
+SELECT pg_catalog.setval('public.logaccess_id_seq', 13, true);
 
 
 --
@@ -249,7 +256,7 @@ SELECT pg_catalog.setval('public.userlink_id_seq', 1, false);
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 4, true);
+SELECT pg_catalog.setval('public.users_id_seq', 5, true);
 
 
 --
@@ -290,6 +297,14 @@ ALTER TABLE ONLY public.users
 
 ALTER TABLE ONLY public."logAccess"
     ADD CONSTRAINT logaccess_userid_fkey FOREIGN KEY ("userId") REFERENCES public.users(id);
+
+
+--
+-- Name: links userId; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.links
+    ADD CONSTRAINT "userId" FOREIGN KEY ("createdBy") REFERENCES public.users(id) NOT VALID;
 
 
 --
