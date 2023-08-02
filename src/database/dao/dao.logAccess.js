@@ -54,7 +54,7 @@ export default class LogAccessDAO {
     async readByToken(token) {
         await this.connect();
 
-        const queryString = 'SELECT * FROM public."logAccess" WHERE token = $1';
+        const queryString = 'SELECT * FROM public."logAccess" WHERE token = $1 and valid = true';
         const values = [token];
 
         try {

@@ -1,11 +1,12 @@
 import conectDB from "../database.connection.js";
 
 class Link {
-    constructor(url, shortUrl, views, createdAt) {
-        this.url = url;
-        this.shortUrl = shortUrl;
-        this.views = views;
-        this.createdAt = createdAt;
+    constructor(url, shortUrl, views, createdAt, createdBy) {
+        this.url = url
+        this.shortUrl = shortUrl
+        this.views = views
+        this.createdAt = createdAt
+        this.createdBy = createdBy
     }
 }
 
@@ -33,11 +34,12 @@ export default class LinkDAO {
             linkData.url,
             linkData.shortUrl,
             linkData.views,
-            linkData.createdAt
-        );
+            linkData.createdAt,
+            linkData.createdBy
+        )
 
-        const queryString = 'INSERT INTO public.links (url, "shortUrl", views, "createdAt") VALUES ($1, $2, $3, $4) RETURNING *';
-        const values = [novoLink.url, novoLink.shortUrl, novoLink.views, novoLink.createdAt];
+        const queryString = 'INSERT INTO public.links (url, "shortUrl", views, "createdAt", "createdBy") VALUES ($1, $2, $3, $4, $5) RETURNING *';
+        const values = [novoLink.url, novoLink.shortUrl, novoLink.views, novoLink.createdAt, novoLink.createdBy];
     
         try {
             const result = await this.pool.query(queryString, values);

@@ -13,8 +13,11 @@ export async function postUrl(req, res){
         const dataRes = await dao.create({
             url: url, 
             createdAt: format(new Date(), 'yyyy-MM-dd HH:MM:ss'),
-            shortUrl: shortUrl
+            shortUrl: shortUrl,
+            createdBy: res.user.id
         })
+        console.log(res.user.id)
+
         const retorno = {
             id: dataRes.id,
             shortUrl: dataRes.shortUrl
