@@ -4,7 +4,7 @@ const url = 'http://localhost:5000/urls/shorten';
 const token = 'eaadb706-304f-40e5-8388-b71888dbfafc';
 
 axios.post(url, {
-  url: 'https://www.google.com.br/?hl=pt-BR',
+  url: 'http://another-enjoyment.net',
 }, { headers: {
     'Authorization': `Bearer ${token}`
   }

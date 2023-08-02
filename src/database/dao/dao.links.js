@@ -45,12 +45,12 @@ export default class LinkDAO {
             const result = await this.pool.query(queryString, values);
             const linkInserido = result.rows[0]; // O resultado da consulta contém a linha inserida com o ID
             console.log('Novo link adicionado ao banco de dados.');
-            await this.disconnect();
-            return linkInserido;
+            await this.disconnect()
+            return linkInserido
         } catch (error) {
-            console.error('Erro ao adicionar novo link ao banco de dados:', error.message);
-            await this.disconnect();
-            return null; // Ou você pode lançar uma exceção aqui, caso necessário
+            console.error('Erro ao adicionar novo link ao banco de dados:', error.message)
+            await this.disconnect()
+            return null
         }
     }
     
