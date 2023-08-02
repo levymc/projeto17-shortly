@@ -21,8 +21,7 @@ export async function validateUserPass(req, res, next){
 
     try{
         const dataRes = await dao.readByEmail(email) // validação do email
-        if (!dataRes) return res.send("Email inválido").status(401)
-        else if (!compare(req.body.password, dataRes.password)) return res.send("Senha inválido").status(401)
+        if (!dataRes || !compare(req.body.password, dataRes.password)) return res.send("Email ou Senha inválidos").status(401)
         res.userData = dataRes
         next()
     }catch (err) {

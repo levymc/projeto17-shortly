@@ -25,3 +25,13 @@ export async function postUrl(req, res){
         return res.status(500).send("Erro no postURL: ",err)
     }
 }
+
+
+export async function getLinks(req,res){
+    try{
+        const links = dao.read()
+    }catch (err) {
+        console.error("Erro postURL: ", err)
+        return res.status(500).send("Erro no postURL: ",err)
+    }
+}
