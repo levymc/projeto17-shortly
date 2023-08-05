@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-axios.get('http://localhost:5000/urls/1').then(res => {
+axios.get('http://localhost:5000/urls/open/q0G0wjS9Xr').then(res => {
     console.log(res.data)
 }).catch(err => {
-    console.log(err.response.data)
+    console.log(err.response)
 })
 
 // axios.get('http://localhost:5000/games?limit=1&offset=1').then(res => {

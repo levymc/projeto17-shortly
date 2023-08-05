@@ -40,7 +40,7 @@ export async function getLinks(req,res){
 }
 
 export const getUrlById = async (req, res) => {
-    const id = req.params.id
+    const id = parseInt(req.params.id)
     try{
         const urlById = await dao.readById(id)
         console.log(urlById)
@@ -55,4 +55,32 @@ export const getUrlById = async (req, res) => {
         console.error("Erro getUrlById: ", err)
         return res.status(500).send("Erro no getUrlById: ",err)
     }
+}
+
+export const openShort = async(req, res) => {
+    const shortUrl = req.params.shortUrl
+    console.log(shortUrl)
+    try{
+        const resDB = await dao.readByshortUrl(shortUrl)
+        if (!resDB) return res.sendStatus(404)
+        addView(resDB)
+        res.redirect(resDB.url)
+    }catch (err) {
+        console.error("Erro getUrlById: ", err)
+        return res.status(500).send("Erro no getUrlById: ",err)
+    }
+}
+
+
+const addView = async (resDB, res) => {
+    const data = {
+        views: resDB.views + 1,
+    }
+    try{
+        const resUpdate = await dao.update(resDB.id, data)
+    }catch (err) {
+        console.error("Erro addView: ", err)
+        return res.status(500).send("Erro no addView: ",err)
+    }
+    
 }

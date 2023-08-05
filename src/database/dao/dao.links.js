@@ -94,34 +94,48 @@ export default class LinkDAO {
             return null;
         }
     }
+
+    async readByshortUrl(shortUrl) {
+        await this.connect();
+
+        const queryString = `SELECT * FROM public.links WHERE "shortUrl" ilike '%${shortUrl}%'`;
+        try {
+            const response = await this.pool.query(queryString);
+            console.log('Consulta realizada com sucesso.');
+            await this.disconnect();
+            return response.rows[0] || null;
+        } catch (error) {
+            console.error('Erro ao consultar o link no banco de dados:', error.message);
+            await this.disconnect();
+            return null;
+        }
+    }
     
     async update(id, linkData) {
-        await this.connect();
-    
-        const linkParaAtualizar = this.links.find(link => link.id === id);
-        if (!linkParaAtualizar) {
-            await this.disconnect();
-            return null; // Link não encontrado, retorna null
+        const existingLink = await this.readById(id)
+        await this.connect()
+        const data = {
+            url: linkData.url || existingLink.url,
+            shortUrl: linkData.shortUrl || existingLink.shortUrl,
+            views: linkData.views || existingLink.views,
+            createdAt: linkData.createdAt || existingLink.createdAt,
         }
-    
-        linkParaAtualizar.url = linkData.url || linkParaAtualizar.url;
-        linkParaAtualizar.shortUrl = linkData.shortUrl || linkParaAtualizar.shortUrl;
-        linkParaAtualizar.views = linkData.views || linkParaAtualizar.views;
-        linkParaAtualizar.createdAt = linkData.createdAt || linkParaAtualizar.createdAt;
-    
+        console.log(data)
         const queryString = 'UPDATE public.links SET url = $1, "shortUrl" = $2, views = $3, "createdAt" = $4 WHERE "id" = $5';
-        const values = [linkParaAtualizar.url, linkParaAtualizar.shortUrl, linkParaAtualizar.views, linkParaAtualizar.createdAt, id];
-    
+        const values = [data.url, data.shortUrl, data.views, data.createdAt, id];
+        
         try {
-            await this.pool.query(queryString, values);
-            console.log('Link atualizado no banco de dados.');
+            const response = await this.pool.query(queryString, values);
+            console.log('Consulta realizada com sucesso.');
+            await this.disconnect();
+            return response.rows[0] || null;
         } catch (error) {
-            console.error('Erro ao atualizar o link no banco de dados:', error.message);
+            console.error('Erro ao consultar o link no banco de dados:', error.message);
+            await this.disconnect();
+            return null;
         }
-    
-        await this.disconnect();
-        return linkParaAtualizar;
     }
+      
 
     async delete(id) {
         await this.connect();
