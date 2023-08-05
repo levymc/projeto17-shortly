@@ -15,3 +15,4 @@ export const userLogin = Joi.object({
 export const urlSchema = Joi.object({
     url: Joi.string().trim().uri().required()
 });
+

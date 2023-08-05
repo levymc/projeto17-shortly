@@ -38,3 +38,21 @@ export async function getLinks(req,res){
         return res.status(500).send("Erro no postURL: ",err)
     }
 }
+
+export const getUrlById = async (req, res) => {
+    const id = req.params.id
+    try{
+        const urlById = await dao.readById(id)
+        console.log(urlById)
+        if (!urlById) return res.sendStatus(404)
+        const response = {
+            id: id, 
+            shortUrl: urlById.shortUrl,
+            url: urlById.url
+        }
+        res.status(200).send(response)
+    }catch (err) {
+        console.error("Erro getUrlById: ", err)
+        return res.status(500).send("Erro no getUrlById: ",err)
+    }
+}
