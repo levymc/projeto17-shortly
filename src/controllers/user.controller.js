@@ -27,10 +27,8 @@ export async function signIn(req, res){
         valid: true
     }
     try{
-        console.log(data)
         const dataRes = await daoLog.create(data)
         console.log(`Login do ${res.userData.name} realizado com sucesso !`)
-        console.log(res.userData.id)
         await daoLog.desativaOutrosAccess(res.userData.id) // desativando outros tokens
         res.send({token: res.token}).status(200)
     }catch (err) {
