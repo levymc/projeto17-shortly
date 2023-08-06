@@ -1,6 +1,8 @@
 import UsuarioDAO from "../database/dao/dao.users.js";
 import { crypt, compare } from "./crypt.js";
+import LinkDAO from "../database/dao/dao.links.js";
 
+const daoLink = new LinkDAO()
 const dao = new UsuarioDAO()
 
 export async function validadeEmail(req, res, next){
@@ -29,3 +31,21 @@ export async function validateUserPass(req, res, next){
         return res.status(500).send("Erro Validação de Usuario e Senha: ",err)
     }
 }
+
+export async function checkShortUrlUserID(req, res, next) {
+    try {
+        const userId = parseInt(res.user.id);
+        const urlId = parseInt(req.params.id);
+        console.log("USER: ", userId);
+        const checkUserID = await daoLink.readByCreatedBy(userId);
+
+        if (!checkUserID) return res.status(404).send("Este usuário não possui nenhuma ShortUrl.");
+        const urlExistsForUser = checkUserID.some(urlObject => urlObject.id === urlId);
+        if (!urlExistsForUser) return res.sendStatus(401)    
+        next();
+    } catch (err) {
+        console.error("Erro checkShortUrlUserID: ", err);
+        return res.status(500).send("Erro checkShortUrlUserID: ", err);
+    }
+}
+  

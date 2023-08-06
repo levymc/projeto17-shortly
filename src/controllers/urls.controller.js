@@ -73,6 +73,20 @@ export const openShort = async(req, res) => {
 }
 
 
+export const deleteUrl = async (req, res) => {
+    try{
+        const urlId = parseInt(req.params.id)
+        const excludedUrl = await dao.delete(urlId)
+        console.log("O URL foi excluído com sucesso!")
+        if (excludedUrl) return res.status(204).send("O URL foi excluído com sucesso!")
+        else return res.sendStatus(404)
+    }catch (err) {
+        console.error("Erro addView: ", err)
+        return res.status(500).send("Erro no addView: ",err)
+    }
+}
+
+
 const addView = async (resDB, res) => {
     const data = {
         views: resDB.views + 1,
@@ -83,5 +97,4 @@ const addView = async (resDB, res) => {
         console.error("Erro addView: ", err)
         return res.status(500).send("Erro no addView: ",err)
     }
-    
 }

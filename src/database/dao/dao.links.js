@@ -95,6 +95,23 @@ export default class LinkDAO {
         }
     }
 
+    async readByCreatedBy(id) {
+        await this.connect();
+
+        const queryString = `SELECT * FROM public.links WHERE "createdBy" = $1`;
+        const value = [id];
+        try {
+            const response = await this.pool.query(queryString, value);
+            console.log('Consulta realizada com sucesso.');
+            await this.disconnect();
+            return response.rows || null;
+        } catch (error) {
+            console.error('Erro ao consultar o link no banco de dados:', error.message);
+            await this.disconnect();
+            return null;
+        }
+    }
+
     async readByshortUrl(shortUrl) {
         await this.connect();
 
@@ -139,26 +156,20 @@ export default class LinkDAO {
 
     async delete(id) {
         await this.connect();
-    
-        const index = this.links.findIndex(link => link.id === id);
-        if (index === -1) {
-            await this.disconnect();
-            return null;
-        }
-
+      
         const queryString = 'DELETE FROM public.links WHERE "id" = $1';
         const values = [id];
-    
+      
         try {
             await this.pool.query(queryString, values);
             console.log('Link excluído do banco de dados.');
+            await this.disconnect();
+            return true
         } catch (error) {
             console.error('Erro ao excluir o link do banco de dados:', error.message);
+            await this.disconnect();
+            return false
         }
-    
-        const linkExcluido = this.links.splice(index, 1)[0];
-    
-        await this.disconnect();
-        return linkExcluido;
-    }
+      }
+      
 }
