@@ -1,7 +1,7 @@
 import { Router } from "express";
 import validateSchema from "../middlewares/validateSchema.js";
 import { userSchema, userLogin, urlSchema } from "../schemas/user.schema.js";
-import { signUp, signIn, userMe } from "../controllers/user.controller.js";
+import { signUp, signIn, userMe, getRanking } from "../controllers/user.controller.js";
 import { validadeEmail, validateUserPass, checkShortUrlUserID } from "../middlewares/userValidates.js";
 import generateToken from "../middlewares/generateToken.js";
 import validateAuth from "../middlewares/validateAuth.js";
@@ -17,6 +17,8 @@ router.post('/urls/shorten', (req, res, next) => validateSchema(req, res, next, 
 router.get('/urls/:id', getUrlById)
 router.get('/urls/open/:shortUrl', openShort)
 router.delete('/urls/:id', validateAuth, checkShortUrlUserID, deleteUrl)
+
+router.get('/ranking', getRanking)
 
 
 router.use((err, req, res, next) => {

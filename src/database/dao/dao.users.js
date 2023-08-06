@@ -79,24 +79,24 @@ export default class UsuarioDAO {
         await this.connect()
 
         const queryString = `
-                            SELECT
-                                u.id AS "id",
-                                u.name AS "name",
-                                SUM(l.views) AS "visitCount",
-                                json_agg(json_build_object(
-                                    'id', l.id,
-                                    'shortUrl', l."shortUrl",
-                                    'url', l.url,
-                                    'visitCount', l.views
-                                )) AS "shortenedUrls"
-                            FROM
-                                public.users u
-                            LEFT JOIN
-                                public.links l ON u.id = l."createdBy"
-                            WHERE
-                                u.id = $1
-                            GROUP BY
-                                u.id, u.name`
+            SELECT
+                u.id AS "id",
+                u.name AS "name",
+                SUM(l.views) AS "visitCount",
+                json_agg(json_build_object(
+                    'id', l.id,
+                    'shortUrl', l."shortUrl",
+                    'url', l.url,
+                    'visitCount', l.views
+                )) AS "shortenedUrls"
+            FROM
+                public.users u
+            LEFT JOIN
+                public.links l ON u.id = l."createdBy"
+            WHERE
+                u.id = $1
+            GROUP BY
+                u.id, u.name`
         const value = [id];
         try {
             const response = await this.pool.query(queryString, value);
@@ -109,6 +109,40 @@ export default class UsuarioDAO {
             return null;
         }
     }
+
+    async getRanking() {
+        await this.connect();
+      
+        const queryString = `
+            SELECT
+                u.id AS "id",
+                u.name AS "name",
+                COUNT(l.id) AS "linksCount",
+                SUM(l.views) AS "visitCount"
+            FROM
+                public.users u
+            LEFT JOIN
+                public.links l ON u.id = l."createdBy"
+            GROUP BY
+                u.id, u.name
+            ORDER BY
+                "visitCount"
+            LIMIT 10
+        `;
+      
+        try {
+            const response = await this.pool.query(queryString);
+            console.log('Consulta realizada com sucesso.');
+            await this.disconnect();
+            return response.rows || [];
+        } catch (error) {
+            console.error('Erro ao consultar o ranking no banco de dados:', error.message);
+            await this.disconnect();
+            return [];
+        }
+    }
+      
+      
 
     async readById(id) {
         await this.connect();

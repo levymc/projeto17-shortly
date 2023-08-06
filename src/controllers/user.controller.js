@@ -49,3 +49,13 @@ export const userMe = async (req, res) => {
         return res.status(500).send("Erro no addView: ",err)
     }
 }
+
+export const getRanking = async (req, res) => {
+    try{
+        const resDB = await dao.getRanking()
+        if (resDB) return res.status(200).send(resDB)
+    }catch (err) {
+        console.error("Erro addView: ", err)
+        return res.status(500).send("Erro no addView: ",err)
+    }
+}
