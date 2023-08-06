@@ -8,7 +8,7 @@ import axios from 'axios'
 
 const token = 'eaadb706-304f-40e5-8388-b71888dbfafc';
 
-axios.delete('http://localhost:5000/urls/1', {
+axios.get('http://localhost:5000/users/me', {
   headers: {
     'Authorization': `Bearer ${token}`
 }}).then(res => {

@@ -75,6 +75,43 @@ export default class UsuarioDAO {
         }
     }
 
+    async readUserMe(id){
+        await this.connect()
+
+        const queryString = `SELECT
+                                u.id AS "id",
+                                u.name AS "name",
+                                SUM(ul.visitcount) AS "visitCount",
+                                json_agg(json_build_object(
+                                    'id', l.id,
+                                    'shortUrl', l."shortUrl",
+                                    'url', l.url,
+                                    'visitCount', ul.visitcount
+                                )) AS "shortenedUrls"
+                            FROM
+                                public.users u
+                            LEFT JOIN
+                                public."userLink" ul ON u.id = ul.userid
+                            LEFT JOIN
+                                public.links l ON ul.linkid = l.id
+                            WHERE
+                                u.id = $1
+                            GROUP BY
+                                u.id, u.name
+                            `
+        const value = [id];
+        try {
+            const response = await this.pool.query(queryString, value);
+            console.log('Consulta realizada com sucesso.');
+            await this.disconnect();
+            return response.rows[0] || null;
+        } catch (error) {
+            console.error('Erro ao consultar o usuário no banco de dados:', error.message);
+            await this.disconnect();
+            return null;
+        }
+    }
+
     async readById(id) {
         await this.connect();
 

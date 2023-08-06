@@ -36,3 +36,16 @@ export async function signIn(req, res){
         return res.status(500).send("Erro no cadastro: ",err)
     }
 }
+
+
+export const userMe = async (req, res) => {
+    try{
+        const userId = parseInt(res.user.id)
+        console.log(userId)
+        const responseJson = await dao.readUserMe(userId)
+        if (responseJson) return res.status(200).send(responseJson)
+    }catch (err) {
+        console.error("Erro addView: ", err)
+        return res.status(500).send("Erro no addView: ",err)
+    }
+}
