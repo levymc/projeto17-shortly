@@ -28,7 +28,7 @@ CREATE TABLE public.links (
     id integer NOT NULL,
     url character varying NOT NULL,
     "shortUrl" character varying,
-    views integer,
+    views integer DEFAULT 0,
     "createdAt" timestamp without time zone,
     "createdBy" integer NOT NULL
 );
@@ -186,14 +186,13 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: links; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.links VALUES (14, 'https://www.google.com.br/?hl=pt-BR', '0t3_JWyo4n', NULL, '2023-08-02 18:08:24', 1);
-INSERT INTO public.links VALUES (15, 'https://www.google.com.br/?hl=pt-BR', '0dZ_lCrjd_', NULL, '2023-08-02 18:08:24', 1);
-INSERT INTO public.links VALUES (16, 'http://another-enjoyment.net', 'q0G0wjS9Xr', NULL, '2023-08-02 19:08:50', 1);
-INSERT INTO public.links VALUES (17, 'http://another-enjoyment.net', 's6cT5oB7iF', NULL, '2023-08-02 19:08:11', 1);
-INSERT INTO public.links VALUES (18, 'http://another-enjoyment.net', 'UO4a9atSRS', NULL, '2023-08-02 19:08:39', 1);
-INSERT INTO public.links VALUES (19, 'http://another-enjoyment.net', 'sTnSxEfa6L', NULL, '2023-08-02 19:08:39', 1);
-INSERT INTO public.links VALUES (20, 'http://another-enjoyment.net', 'oUQx27vDmF', NULL, '2023-08-02 19:08:11', 1);
-INSERT INTO public.links VALUES (21, 'http://chief-marathon.br', 'Otksn2NBSI', NULL, '2023-08-02 19:08:47', 5);
+INSERT INTO public.links VALUES (17, 'http://another-enjoyment.net', 's6cT5oB7iF', 0, '2023-08-02 19:08:11', 1);
+INSERT INTO public.links VALUES (18, 'http://another-enjoyment.net', 'UO4a9atSRS', 0, '2023-08-02 19:08:39', 1);
+INSERT INTO public.links VALUES (19, 'http://another-enjoyment.net', 'sTnSxEfa6L', 0, '2023-08-02 19:08:39', 1);
+INSERT INTO public.links VALUES (20, 'http://another-enjoyment.net', 'oUQx27vDmF', 0, '2023-08-02 19:08:11', 1);
+INSERT INTO public.links VALUES (21, 'http://chief-marathon.br', 'Otksn2NBSI', 0, '2023-08-02 19:08:47', 5);
+INSERT INTO public.links VALUES (16, 'http://another-enjoyment.net', 'q0G0wjS9Xr', 3, '2023-08-02 19:08:50', 1);
+INSERT INTO public.links VALUES (15, 'https://www.google.com.br/?hl=pt-BR', '0dZ_lCrjd_', 4, '2023-08-02 18:08:24', 1);
 
 
 --
