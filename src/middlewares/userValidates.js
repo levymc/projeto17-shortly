@@ -41,7 +41,7 @@ export async function checkShortUrlUserID(req, res, next) {
 
         if (!checkUserID) return res.status(404).send("Este usuário não possui nenhuma ShortUrl.");
         const urlExistsForUser = checkUserID.some(urlObject => urlObject.id === urlId);
-        if (!urlExistsForUser) return res.sendStatus(401)    
+        if (!urlExistsForUser) return res.sendStatus(404)    
         next();
     } catch (err) {
         console.error("Erro checkShortUrlUserID: ", err);
