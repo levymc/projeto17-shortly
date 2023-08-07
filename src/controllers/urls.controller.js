@@ -66,7 +66,7 @@ export const openShort = async(req, res) => {
         if (!resDB) return res.sendStatus(404)
         addView(resDB)
         console.log("Redirecionando para URL: ", resDB.url)
-        res.redirect(resDB.url)
+        res.status(302).redirect(resDB.url)
     }catch (err) {
         console.error("Erro getUrlById: ", err)
         return res.status(500).send("Erro no getUrlById: ",err)
@@ -86,9 +86,6 @@ export const deleteUrl = async (req, res) => {
         return res.status(500).send("Erro no addView: ",err)
     }
 }
-
-
-
 
 const addView = async (resDB, res) => {
     const data = {
