@@ -64,9 +64,9 @@ export const openShort = async(req, res) => {
     try{
         const resDB = await dao.readByshortUrl(shortUrl)
         if (!resDB) return res.sendStatus(404)
-        addView(resDB)
         console.log("Redirecionando para URL: ", resDB.url)
         res.status(302).redirect(resDB.url)
+        addView(resDB)
     }catch (err) {
         console.error("Erro getUrlById: ", err)
         return res.status(500).send("Erro no getUrlById: ",err)

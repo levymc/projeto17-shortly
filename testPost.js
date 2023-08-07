@@ -4,7 +4,7 @@ const url = 'http://localhost:5000/urls/shorten';
 const token = 'eaadb706-304f-40e5-8388-b71888dbfafc';
 
 axios.post(url, {
-  url: 'http://another-enjoyment.net',
+  url: 'https://www.bing.com/',
 }, { headers: {
     'Authorization': `Bearer ${token}`
   }
