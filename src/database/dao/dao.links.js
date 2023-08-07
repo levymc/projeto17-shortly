@@ -38,7 +38,7 @@ export default class LinkDAO {
             linkData.createdBy
         )
 
-        const queryString = 'INSERT INTO public.links (url, "shortUrl", visitCount, "createdAt", "createdBy") VALUES ($1, $2, $3, $4, $5) RETURNING *';
+        const queryString = 'INSERT INTO public.links (url, "shortUrl", "visitCount", "createdAt", "createdBy") VALUES ($1, $2, $3, $4, $5) RETURNING *';
         const values = [novoLink.url, novoLink.shortUrl, novoLink.visitCount, novoLink.createdAt, novoLink.createdBy];
     
         try {
@@ -138,7 +138,7 @@ export default class LinkDAO {
             createdAt: linkData.createdAt || existingLink.createdAt,
         }
         console.log(data)
-        const queryString = 'UPDATE public.links SET url = $1, "shortUrl" = $2, visitCount = $3, "createdAt" = $4 WHERE "id" = $5';
+        const queryString = 'UPDATE public.links SET url = $1, "shortUrl" = $2, "visitCount" = $3, "createdAt" = $4 WHERE "id" = $5';
         const values = [data.url, data.shortUrl, data.visitCount, data.createdAt, id];
         
         try {
