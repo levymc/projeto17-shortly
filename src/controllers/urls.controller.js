@@ -14,6 +14,7 @@ export async function postUrl(req, res){
             url: url, 
             createdAt: format(new Date(), 'yyyy-MM-dd HH:MM:ss'),
             shortUrl: shortUrl,
+            visitCount: 0,
             createdBy: res.user.id
         })
         console.log(res.user.id)
