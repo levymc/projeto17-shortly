@@ -8,21 +8,21 @@ import axios from 'axios'
 
 const token = 'eaadb706-304f-40e5-8388-b71888dbfafc';
 
-// axios.get('http://localhost:5000/users/me', {
-//   headers: {
-//     'Authorization': `Bearer ${token}`
-// }}).then(res => {
-//   console.log(res.data);
-// }).catch(err => {
-//   console.log(err.response.data);
-// });
-
-
-axios.get('http://localhost:5000/ranking').then(res => {
-    console.log(res.data)
+axios.get('http://localhost:5000/users/me', {
+  headers: {
+    'Authorization': `Bearer ${token}`
+}}).then(res => {
+  console.log(res.data);
 }).catch(err => {
-    console.log(err.response.data)
-})
+  console.log(err.response.data);
+});
+
+
+// axios.get('http://localhost:5000/ranking').then(res => {
+//     console.log(res.data)
+// }).catch(err => {
+//     console.log(err.response.data)
+// })
 
 // axios.get('http://localhost:5000/games').then(res => {
 //     console.log(res.data)
