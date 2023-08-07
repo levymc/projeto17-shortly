@@ -126,7 +126,7 @@ export default class UsuarioDAO {
             GROUP BY
                 u.id, u.name
             ORDER BY
-                "visitCount"
+                "visitCount" desc
             LIMIT 10
         `;
       
