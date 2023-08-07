@@ -28,7 +28,7 @@ CREATE TABLE public.links (
     id integer NOT NULL,
     url character varying NOT NULL,
     "shortUrl" character varying,
-    views integer DEFAULT 0,
+    "visitCount" integer DEFAULT 0,
     "createdAt" timestamp without time zone,
     "createdBy" integer NOT NULL
 );

@@ -1,10 +1,10 @@
 import conectDB from "../database.connection.js";
 
 class Link {
-    constructor(url, shortUrl, views, createdAt, createdBy) {
+    constructor(url, shortUrl, visitCount, createdAt, createdBy) {
         this.url = url
         this.shortUrl = shortUrl
-        this.views = views
+        this.visitCount = visitCount
         this.createdAt = createdAt
         this.createdBy = createdBy
     }
@@ -33,13 +33,13 @@ export default class LinkDAO {
         const novoLink = new Link(
             linkData.url,
             linkData.shortUrl,
-            linkData.views,
+            linkData.visitCount,
             linkData.createdAt,
             linkData.createdBy
         )
 
-        const queryString = 'INSERT INTO public.links (url, "shortUrl", views, "createdAt", "createdBy") VALUES ($1, $2, $3, $4, $5) RETURNING *';
-        const values = [novoLink.url, novoLink.shortUrl, novoLink.views, novoLink.createdAt, novoLink.createdBy];
+        const queryString = 'INSERT INTO public.links (url, "shortUrl", visitCount, "createdAt", "createdBy") VALUES ($1, $2, $3, $4, $5) RETURNING *';
+        const values = [novoLink.url, novoLink.shortUrl, novoLink.visitCount, novoLink.createdAt, novoLink.createdBy];
     
         try {
             const result = await this.pool.query(queryString, values);
@@ -134,12 +134,12 @@ export default class LinkDAO {
         const data = {
             url: linkData.url || existingLink.url,
             shortUrl: linkData.shortUrl || existingLink.shortUrl,
-            views: linkData.views || existingLink.views,
+            visitCount: linkData.visitCount || existingLink.visitCount,
             createdAt: linkData.createdAt || existingLink.createdAt,
         }
         console.log(data)
-        const queryString = 'UPDATE public.links SET url = $1, "shortUrl" = $2, views = $3, "createdAt" = $4 WHERE "id" = $5';
-        const values = [data.url, data.shortUrl, data.views, data.createdAt, id];
+        const queryString = 'UPDATE public.links SET url = $1, "shortUrl" = $2, visitCount = $3, "createdAt" = $4 WHERE "id" = $5';
+        const values = [data.url, data.shortUrl, data.visitCount, data.createdAt, id];
         
         try {
             const response = await this.pool.query(queryString, values);

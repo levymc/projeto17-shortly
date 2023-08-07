@@ -82,12 +82,12 @@ export default class UsuarioDAO {
             SELECT
                 u.id AS "id",
                 u.name AS "name",
-                SUM(l.views) AS "visitCount",
+                SUM(l.visitCount) AS "visitCount",
                 json_agg(json_build_object(
                     'id', l.id,
                     'shortUrl', l."shortUrl",
                     'url', l.url,
-                    'visitCount', l.views
+                    'visitCount', l.visitCount
                 )) AS "shortenedUrls"
             FROM
                 public.users u
@@ -118,7 +118,7 @@ export default class UsuarioDAO {
                 u.id AS "id",
                 u.name AS "name",
                 COUNT(l.id) AS "linksCount",
-                SUM(l.views) AS "visitCount"
+                SUM(l.visitCount) AS "visitCount"
             FROM
                 public.users u
             LEFT JOIN
