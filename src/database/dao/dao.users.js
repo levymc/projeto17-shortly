@@ -87,7 +87,7 @@ export default class UsuarioDAO {
                     'id', l.id,
                     'shortUrl', l."shortUrl",
                     'url', l.url,
-                    '"visitCount"', l."visitCount"
+                    'visitCount', l."visitCount"
                 )) AS "shortenedUrls"
             FROM
                 public.users u
