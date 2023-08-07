@@ -1,10 +1,10 @@
 import axios from 'axios'
 
 const url = 'http://localhost:5000/urls/shorten';
-const token = 'eaadb706-304f-40e5-8388-b71888dbfafc';
+const token = 'efca96e6-9f3a-4a08-998e-a3bc5023e8b2';
 
 axios.post(url, {
-  url: 'https://www.bing.com/',
+  url: 'https://www.youtube.com/',
 }, { headers: {
     'Authorization': `Bearer ${token}`
   }
@@ -14,14 +14,13 @@ axios.post(url, {
   console.log(err.response.data);
 });
 
-// axios.post('http://localhost:5000/teste', {
+// axios.post('http://localhost:5000/signin', {
 //     email: "fred@gmail.com.br",
 //     password: "fred",
-//     token: "Bearer eaadb706-304f-40e5-8388-b71888dbfafc"
 // }).then(res =>{
 //     console.log(res.data)
 // }).catch(err => {
-//     console.log(err.response.data)
+//     console.log(err.response)
 // })
 
 // axios.post('http://localhost:5000/signup', {

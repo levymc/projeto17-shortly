@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.get('http://localhost:5000/urls/open/0dZ_lCrjd_').then(res => {
+axios.get('http://localhost:5000/urls/open/uUV80_puirvm8Q2QV4WT0').then(res => {
     console.log(res.data)
 }).catch(err => {
     console.log(err.response)
